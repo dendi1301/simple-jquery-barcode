@@ -1,7 +1,7 @@
 # simple-jquery-barcode
 Simple JQuery Barcode
 
-Source : https://github.com/jbdemonte/barcode
+Referensi : https://github.com/jbdemonte/barcode
 
 # Barcode EAN 13
 Proyek ini adalah menggunakan bahasa HTML dan JQuery untuk membuat atau menampilkan barcode EAN 13.
