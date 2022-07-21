@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barcode Generator</title>
+</head>
+<style>
+    * {
+        color: #7F7F7F;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    #config {
+        overflow: auto;
+        margin-bottom: 10px;
+    }
+
+    .config {
+        float: left;
+        width: 200px;
+        height: 250px;
+        border: 1px solid #000;
+        margin-left: 10px;
+    }
+
+    .config .title {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .config .barcode2D,
+    #miscCanvas {
+        display: none;
+    }
+
+    #submit {
+        clear: both;
+    }
+
+    #barcodeTarget,
+    #canvasTarget {
+        margin-top: 20px;
+    }
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/jquery-barcode.js"></script>
+<script type="text/javascript">
+    function generateBarcode() {
+        var value = $("#barcodeValue").val();
+        var btype = "ean13";
+        // barcodeType = ['ean8','ean13','upc','std25','int25','code11','code39','code93','code128','codabar','msi','datamatrix'];
+        // barcodeType = ['EAN 8','EAN 13','UPC','Standard 2 of 5 (industrial)','Interleaved 2 of 5','Code 11','Code 39','Code 93','Code 128','Codabar','MSI','Data Matrix'];
+        // var renderer = $("input[name=renderer]:checked").val();
+
+        var settings = {
+            output: "svg",
+            bgColor: "#FFFFFF",
+            color: "#000000",
+            barWidth: "1",
+            barHeight: "30",
+        };
+        $("#barcodeTarget").html("").show().barcode(value, btype, settings);
+        $('#barcodeValue').focus();
+    }
+
+
+    $(function () {
+        $('input').focus(function () {
+            return $(this).select();
+        })
+        $('#barcodeValue').keypress(function (ev) {
+            var event = ev.keyCode | ev.witch;
+            if (event == 13) {
+                generateBarcode();
+            }
+        })
+        generateBarcode();
+    });
+</script>
+
+<body>
+    Please fill in the code :
+    <br />
+    <input type="text" id="barcodeValue" value="">
+
+    <button type="button" onclick="generateBarcode();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate the
+        barcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </button>
+
+    <div id="barcodeTarget" class="barcodeTarget"></div>
+
+</body>
+
+</html>
